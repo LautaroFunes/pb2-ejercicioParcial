@@ -77,7 +77,7 @@ public class Disqueria {
 		for (Ventas lista : listaVentas) {
 			if (lista.getDiscoAVender() instanceof Cds) {
 				Integer valorAdevolver = 0;
-				valorAdevolver += lista.getCantidad();
+				valorAdevolver += ((Cds) lista.getDiscoAVender()).getCantidadDeCds();
 				return valorAdevolver;
 			}
 		}
