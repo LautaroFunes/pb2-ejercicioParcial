@@ -105,4 +105,12 @@ public abstract class Disco {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Disco [codigo=" + codigo + ", artista=" + artista + ", titulo=" + titulo + ", anioDePublicacion="
+				+ anioDePublicacion + ", precio=" + precio + "]";
+	}
+	
+	
+
 }

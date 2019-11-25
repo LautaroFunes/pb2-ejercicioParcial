@@ -7,6 +7,14 @@ public class Ventas {
 	private Integer cantidad;
 	private Double total;
 
+	public Ventas(Disco discoAVender, Integer idVenta, Integer cantidad, Double total) {
+		super();
+		this.discoAVender = discoAVender;
+		this.idVenta = idVenta;
+		this.cantidad = cantidad;
+		this.total = total;
+	}
+
 	public Integer getIdVenta() {
 		return idVenta;
 	}
@@ -34,7 +42,7 @@ public class Ventas {
 	public Disco getDiscoAVender() {
 		return discoAVender;
 	}
-	
+
 	public void setDiscoAVender(Disco discoAVender) {
 		this.discoAVender = discoAVender;
 	}

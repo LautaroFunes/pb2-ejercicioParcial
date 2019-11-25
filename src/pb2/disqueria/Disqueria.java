@@ -9,10 +9,6 @@ import java.util.TreeSet;
 
 public class Disqueria {
 	// private String nombre;
-	Disqueria s = new Disqueria();
-	Disco d1 = new Cds(null, null, null, null, null, null);
-	Disco d2 = new Vinilo(null, null, null, null, null, null, null);
-
 	Set<Disco> listaDiscos = new HashSet<Disco>();
 	List<Ventas> listaVentas = new LinkedList<Ventas>();
 
@@ -40,7 +36,6 @@ public class Disqueria {
 		while (it.hasNext()) {
 			Disco aux = it.next();
 			if (aux.getCodigo().equals(vent.getDiscoAVender().getCodigo())) {
-				vent.setIdVenta(listaVentas.size() + 1);
 				listaVentas.add(vent);
 				it.remove();
 			}
@@ -79,22 +74,42 @@ public class Disqueria {
 	}
 
 	public Integer ventaTotalDeCdsSimples() { // no es void
-		for(Ventas lista :listaVentas) {
-			if(lista.getDiscoAVender() instanceof Cds) {
-				return listaVentas.size();
+		for (Ventas lista : listaVentas) {
+			if (lista.getDiscoAVender() instanceof Cds) {
+				Integer valorAdevolver = 0;
+				valorAdevolver += lista.getCantidad();
+				return valorAdevolver;
 			}
 		}
 		return 0;
 	}
 
-	public Boolean modificarPrecio(String codigo, Double precio) throws ElDiscoNoExisteException {
-		for (Disco disc : listaDiscos) {
-			if (disc.getCodigo().equals(codigo)) {
-				disc.setPrecio(precio);
-				return true;
+	public Boolean modificarPrecio(String codigo, Double precio) throws ElPrecioEsInvalidoException {
+		if (precio > 0.0) {
+			for (Disco n : listaDiscos) {
+				if (n.getCodigo().equals(codigo)) {
+					n.setPrecio(precio);
+					return true;
+				}
 			}
 		}
-		throw new ElDiscoNoExisteException();
+		throw new ElPrecioEsInvalidoException();
+	}
+
+	public Set<Disco> getListaDiscos() {
+		return listaDiscos;
+	}
+
+	public void setListaDiscos(Set<Disco> listaDiscos) {
+		this.listaDiscos = listaDiscos;
+	}
+
+	public List<Ventas> getListaVentas() {
+		return listaVentas;
+	}
+
+	public void setListaVentas(List<Ventas> listaVentas) {
+		this.listaVentas = listaVentas;
 	}
 
 }
