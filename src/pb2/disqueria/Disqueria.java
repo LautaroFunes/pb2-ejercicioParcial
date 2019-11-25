@@ -1,42 +1,100 @@
 package pb2.disqueria;
 
-public class Disqueria {
-	private String nombre;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
-	public Disqueria(String nombre) {
-		this.nombre = nombre;
+public class Disqueria {
+	// private String nombre;
+	Disqueria s = new Disqueria();
+	Disco d1 = new Cds(null, null, null, null, null, null);
+	Disco d2 = new Vinilo(null, null, null, null, null, null, null);
+
+	Set<Disco> listaDiscos = new HashSet<Disco>();
+	List<Ventas> listaVentas = new LinkedList<Ventas>();
+
+	public Disqueria(/* String nombre */) {
+		// this.nombre = nombre;
 	}
-	
-	public void agregarDisco(Disco nuevo) { //sin excepciones. No retorna nada
-		
+
+	public void agregarDisco(Disco nuevo) { // sin excepciones. No retorna nada
+		listaDiscos.add(nuevo);
 	}
-	
-	public Boolean eliminarDisco(String codigo) {
-		return false;
+
+	public Boolean eliminarDisco(String codigo) throws ElDiscoNoExisteException {
+		Iterator<Disco> it = listaDiscos.iterator();
+		while (it.hasNext()) {
+			Disco aux = it.next();
+			if (aux.getCodigo().equals(codigo)) {
+				it.remove();
+			}
+		}
+		throw new ElDiscoNoExisteException();
 	}
-	
-	public void agregarVenta() {
-		
+
+	public void agregarVenta(Ventas vent) {
+		Iterator<Disco> it = listaDiscos.iterator();
+		while (it.hasNext()) {
+			Disco aux = it.next();
+			if (aux.getCodigo().equals(vent.getDiscoAVender().getCodigo())) {
+				vent.setIdVenta(listaVentas.size() + 1);
+				listaVentas.add(vent);
+				it.remove();
+			}
+		}
 	}
-	
-	public Boolean eliminarVenta(Integer id) {
-		return false;
+
+	public Boolean eliminarVenta(Integer id) throws LaVentaNoExisteException {
+		Iterator<Ventas> it = listaVentas.iterator();
+		while (it.hasNext()) {
+			Ventas aux = it.next();
+			if (aux.getIdVenta().equals(id)) {
+				it.remove();
+			}
+		}
+		throw new LaVentaNoExisteException();
 	}
-	
-	public void listaDeCdsOrdenadosPorAñoDePublicacion() { //no es void
-		
+
+	public void listaDeCdsOrdenadosPorAnioDePublicacion() { // no es void
+		Set<Cds> listaOrdenada = new TreeSet<Cds>();
+		for (Disco disc : listaDiscos) {
+			if (disc instanceof Cds) {
+				listaOrdenada.add((Cds) disc);
+			}
+		}
 	}
-	
-	public void cantidadDeVinilosVendidosDeColorNegro() { //no es void
-		
+
+	public Ventas cantidadDeVinilosVendidosDeColorNegro() { // no es void
+		for (Ventas lista : listaVentas) {
+			if (lista.getDiscoAVender() instanceof Vinilo) {
+				if (((Vinilo) lista.getDiscoAVender()).getColor().equals("Negro")) {
+					return lista;
+				}
+			}
+		}
+		return null;
 	}
-	
-	public void ventaTotalDeCdsSimples() { //no es void
-		
+
+	public Integer ventaTotalDeCdsSimples() { // no es void
+		for(Ventas lista :listaVentas) {
+			if(lista.getDiscoAVender() instanceof Cds) {
+				return listaVentas.size();
+			}
+		}
+		return 0;
 	}
-	
-	public Boolean modificarPrecio(String codigo) {
-		return false;
+
+	public Boolean modificarPrecio(String codigo, Double precio) throws ElDiscoNoExisteException {
+		for (Disco disc : listaDiscos) {
+			if (disc.getCodigo().equals(codigo)) {
+				disc.setPrecio(precio);
+				return true;
+			}
+		}
+		throw new ElDiscoNoExisteException();
 	}
-	
+
 }
