@@ -19,10 +19,10 @@ public class Cds extends Disco implements Comparable<Cds> {
 
 	@Override
 	public int compareTo(Cds arg0) {
-		if (this.getAnioDePublicacion().compareTo(getAnioDePublicacion()) == 0) {
-			return this.getTitulo().compareTo(getTitulo());
+		if (this.getAnioDePublicacion().compareTo(arg0.getAnioDePublicacion()) == 0) {
+			return this.getTitulo().compareTo(arg0.getTitulo());
 		} else
-			return this.getAnioDePublicacion().compareTo(getAnioDePublicacion());
+			return this.getAnioDePublicacion().compareTo(arg0.getAnioDePublicacion());
 	}
 
 	@Override

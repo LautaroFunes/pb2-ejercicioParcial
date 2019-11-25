@@ -10,7 +10,7 @@ import java.util.TreeSet;
 public class Disqueria {
 	// private String nombre;
 	Set<Disco> listaDiscos = new HashSet<Disco>();
-	List<Ventas> listaVentas = new LinkedList<Ventas>();
+	Set<Ventas> listaVentas = new TreeSet<Ventas>();
 
 	public Disqueria(/* String nombre */) {
 		// this.nombre = nombre;
@@ -104,11 +104,11 @@ public class Disqueria {
 		this.listaDiscos = listaDiscos;
 	}
 
-	public List<Ventas> getListaVentas() {
+	public Set<Ventas> getListaVentas() {
 		return listaVentas;
 	}
 
-	public void setListaVentas(List<Ventas> listaVentas) {
+	public void setListaVentas(Set<Ventas> listaVentas) {
 		this.listaVentas = listaVentas;
 	}
 

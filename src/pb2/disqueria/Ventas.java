@@ -1,6 +1,6 @@
 package pb2.disqueria;
 
-public class Ventas {
+public class Ventas implements Comparable<Ventas> {
 
 	private Disco discoAVender;
 	private Integer idVenta;
@@ -45,6 +45,11 @@ public class Ventas {
 
 	public void setDiscoAVender(Disco discoAVender) {
 		this.discoAVender = discoAVender;
+	}
+
+	@Override
+	public int compareTo(Ventas arg0) {
+		return idVenta.compareTo(arg0.getIdVenta());
 	}
 
 }
