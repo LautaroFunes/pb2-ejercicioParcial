@@ -1,6 +1,6 @@
 package pb2.disqueria;
 
-public class Cds extends Disco implements Comparable<Cds> {
+public class Cds extends Disco /* implements Comparable */ {
 	private Integer cantidadDeCds;
 
 	public Cds(String codigo, String artista, String titulo, Integer anioDePublicacion, Double precio,
@@ -15,14 +15,6 @@ public class Cds extends Disco implements Comparable<Cds> {
 
 	public void setCantidadDeCds(Integer cantidadDeCds) {
 		this.cantidadDeCds = cantidadDeCds;
-	}
-
-	@Override
-	public int compareTo(Cds arg0) {
-		if (this.getAnioDePublicacion().compareTo(arg0.getAnioDePublicacion()) == 0) {
-			return this.getTitulo().compareTo(arg0.getTitulo());
-		} else
-			return this.getAnioDePublicacion().compareTo(arg0.getAnioDePublicacion());
 	}
 
 	@Override

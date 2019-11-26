@@ -108,7 +108,7 @@ public abstract class Disco {
 	@Override
 	public String toString() {
 		return "Disco [codigo=" + codigo + ", artista=" + artista + ", titulo=" + titulo + ", anioDePublicacion="
-				+ anioDePublicacion + ", precio=" + precio + "]";
+				+ anioDePublicacion + ", precio=" + precio + "\n";
 	}
 	
 	

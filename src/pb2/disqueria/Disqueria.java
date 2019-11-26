@@ -1,5 +1,8 @@
 package pb2.disqueria;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,12 +11,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Disqueria {
-	// private String nombre;
-	Set<Disco> listaDiscos = new HashSet<Disco>();
+	List<Disco> listaDiscos = new LinkedList<Disco>();
 	Set<Ventas> listaVentas = new TreeSet<Ventas>();
 
-	public Disqueria(/* String nombre */) {
-		// this.nombre = nombre;
+	public Disqueria() {
 	}
 
 	public void agregarDisco(Disco nuevo) { // sin excepciones. No retorna nada
@@ -54,34 +55,38 @@ public class Disqueria {
 	}
 
 	public void listaDeCdsOrdenadosPorAnioDePublicacion() { // no es void
-		Set<Cds> listaOrdenada = new TreeSet<Cds>();
+		List<Cds> listaOrdenada = new LinkedList<Cds>();
 		for (Disco disc : listaDiscos) {
 			if (disc instanceof Cds) {
 				listaOrdenada.add((Cds) disc);
+				listaOrdenada.sort(new OrdenAnioDePublicacion());
+				System.out.println(listaOrdenada);
 			}
 		}
 	}
 
-	public Ventas cantidadDeVinilosVendidosDeColorNegro() { // no es void
+	public Integer cantidadDeVinilosVendidosDeColorNegro() { // no es void
 		for (Ventas lista : listaVentas) {
 			if (lista.getDiscoAVender() instanceof Vinilo) {
-				if (((Vinilo) lista.getDiscoAVender()).getColor().equals("Negro")) {
-					return lista;
+				if (((Vinilo) lista.getDiscoAVender()).getColor().equals("negro")) {
+					Integer devolver = 0;
+					devolver += lista.getCantidad();
+					return devolver;
 				}
 			}
 		}
-		return null;
+		return 0;
 	}
 
-	public Integer ventaTotalDeCdsSimples() { // no es void
+	public Double ventaTotalDeCdsSimples() { // no es void
 		for (Ventas lista : listaVentas) {
 			if (lista.getDiscoAVender() instanceof Cds) {
-				Integer valorAdevolver = 0;
-				valorAdevolver += ((Cds) lista.getDiscoAVender()).getCantidadDeCds();
+				Double valorAdevolver = 0.0;
+				valorAdevolver += lista.getDiscoAVender().getPrecio();
 				return valorAdevolver;
 			}
 		}
-		return 0;
+		return 0.0;
 	}
 
 	public Boolean modificarPrecio(String codigo, Double precio) throws ElPrecioEsInvalidoException {
@@ -96,11 +101,11 @@ public class Disqueria {
 		throw new ElPrecioEsInvalidoException();
 	}
 
-	public Set<Disco> getListaDiscos() {
+	public List<Disco> getListaDiscos() {
 		return listaDiscos;
 	}
 
-	public void setListaDiscos(Set<Disco> listaDiscos) {
+	public void setListaDiscos(List<Disco> listaDiscos) {
 		this.listaDiscos = listaDiscos;
 	}
 

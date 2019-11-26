@@ -7,16 +7,18 @@ public class testDisqueria {
 //
 	Disqueria d = new Disqueria();
 	Disco nuevo1 = new Cds("B0030901-02", "Beatles", "Abbey Road (2019)", 2019, 1000.0, 20); // es un cd simple
-	Disco nuevo2 = new Vinilo("B0030975-01", "Beatles", "Abbey Road (2019)", 2019, 2000.0, 20, null); // es un vinilo
-																										// doble de
-																										// color negro
-//	Disco nuevo3=new Disco("B0030901-02", "Beatles", "Abbey Road (2019)", 2019, 1000.0);//es un cd simple
-//	
+	Disco nuevo2 = new Vinilo("B0030975-01", "Beatles", "Abbey Road (2019)", 2019, 2000.0, 20, "Negro"); // es un vinilo
+																											// doble de
+																											// color
+																											// negro
+	Disco nuevo3 = new Vinilo("B0030975-01", "Beatles", "Abbey Road (2019)", 2019, 2000.0, 20, "Negro"); // es un cd
+																											// simple
 
 	@Test
 	public void testQueVerifiqueQueSeAgregaronDosDiscos() {
 		d.agregarDisco(nuevo1);
 		d.agregarDisco(nuevo2);
+		d.agregarDisco(nuevo3);
 		Integer valorEsperado = 2;
 		Integer valorActual = d.getListaDiscos().size();
 		Assert.assertEquals(valorEsperado, valorActual);
