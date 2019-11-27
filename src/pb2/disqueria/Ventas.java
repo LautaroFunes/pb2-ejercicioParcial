@@ -8,7 +8,6 @@ public class Ventas implements Comparable<Ventas> {
 	private Double total;
 
 	public Ventas(Disco discoAVender, Integer idVenta, Integer cantidad, Double total) {
-		super();
 		this.discoAVender = discoAVender;
 		this.idVenta = idVenta;
 		this.cantidad = cantidad;

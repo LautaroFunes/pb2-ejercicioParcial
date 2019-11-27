@@ -1,5 +1,7 @@
 package pb2.disqueria;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -7,12 +9,8 @@ public class testDisqueria {
 //
 	Disqueria d = new Disqueria();
 	Disco nuevo1 = new Cds("B0030901-02", "Beatles", "Abbey Road (2019)", 2019, 1000.0, 20); // es un cd simple
-	Disco nuevo2 = new Vinilo("B0030975-01", "Beatles", "Abbey Road (2019)", 2019, 2000.0, 20, "Negro"); // es un vinilo
-																											// doble de
-																											// color
-																											// negro
-	Disco nuevo3 = new Vinilo("B0030975-01", "Beatles", "Abbey Road (2019)", 2019, 2000.0, 20, "Negro"); // es un cd
-																											// simple
+	Disco nuevo2 = new Vinilo("B0030975-01", "Beatles", "Abbey Road (2019)", 2019, 2000.0, 20, "Negro"); // negro
+	Disco nuevo3 = new Vinilo("B0030975-01", "Beatles", "Abbey Road (2019)", 2019, 2000.0, 20, "Negro"); // negro
 
 	@Test
 	public void testQueVerifiqueQueSeAgregaronDosDiscos() {
@@ -29,6 +27,7 @@ public class testDisqueria {
 		d.agregarDisco(nuevo1);
 		try {
 			d.eliminarDisco("B0030901-02");
+			assertTrue(d.eliminarDisco("B0030901-02"));
 		} catch (ElDiscoNoExisteException e) {
 			e.printStackTrace();
 		}
@@ -48,6 +47,7 @@ public class testDisqueria {
 		d.agregarVenta(vent);
 		try {
 			d.eliminarVenta(0);
+			assertTrue(d.eliminarVenta(0));
 		} catch (LaVentaNoExisteException e) {
 			e.printStackTrace();
 		}
@@ -71,7 +71,7 @@ public class testDisqueria {
 	public void testQueModificaPrecio() {
 		d.agregarDisco(nuevo1);
 		try {
-			d.modificarPrecio("B0030901-02", 500.0);
+			assertTrue(d.modificarPrecio("B0030901-02", 500.0));
 		} catch (ElPrecioEsInvalidoException e) {
 			e.printStackTrace();
 		}

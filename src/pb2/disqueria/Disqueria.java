@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Disqueria {
-	List<Disco> listaDiscos = new LinkedList<Disco>();
+	Set<Disco> listaDiscos = new HashSet<Disco>();
 	Set<Ventas> listaVentas = new TreeSet<Ventas>();
 
 	public Disqueria() {
@@ -54,39 +54,35 @@ public class Disqueria {
 		throw new LaVentaNoExisteException();
 	}
 
-	public void listaDeCdsOrdenadosPorAnioDePublicacion() { // no es void
+	public List<Cds> listaDeCdsOrdenadosPorAnioDePublicacion() { // no es void
 		List<Cds> listaOrdenada = new LinkedList<Cds>();
 		for (Disco disc : listaDiscos) {
 			if (disc instanceof Cds) {
 				listaOrdenada.add((Cds) disc);
 				listaOrdenada.sort(new OrdenAnioDePublicacion());
-				System.out.println(listaOrdenada);
 			}
 		}
+		return listaOrdenada;
 	}
 
 	public Integer cantidadDeVinilosVendidosDeColorNegro() { // no es void
+		Integer devolver = 0;
 		for (Ventas lista : listaVentas) {
-			if (lista.getDiscoAVender() instanceof Vinilo) {
-				if (((Vinilo) lista.getDiscoAVender()).getColor().equals("negro")) {
-					Integer devolver = 0;
-					devolver += lista.getCantidad();
-					return devolver;
-				}
+			if (((Vinilo) lista.getDiscoAVender()).getColor().equals("negro")) {
+				devolver += lista.getCantidad();
 			}
 		}
-		return 0;
+		return devolver;
 	}
 
 	public Double ventaTotalDeCdsSimples() { // no es void
+		Double valorAdevolver = 0.0;
 		for (Ventas lista : listaVentas) {
 			if (lista.getDiscoAVender() instanceof Cds) {
-				Double valorAdevolver = 0.0;
-				valorAdevolver += lista.getDiscoAVender().getPrecio();
-				return valorAdevolver;
+				valorAdevolver += lista.getTotal();
 			}
 		}
-		return 0.0;
+		return valorAdevolver;
 	}
 
 	public Boolean modificarPrecio(String codigo, Double precio) throws ElPrecioEsInvalidoException {
@@ -101,11 +97,11 @@ public class Disqueria {
 		throw new ElPrecioEsInvalidoException();
 	}
 
-	public List<Disco> getListaDiscos() {
+	public Set<Disco> getListaDiscos() {
 		return listaDiscos;
 	}
 
-	public void setListaDiscos(List<Disco> listaDiscos) {
+	public void setListaDiscos(Set<Disco> listaDiscos) {
 		this.listaDiscos = listaDiscos;
 	}
 
